@@ -11,15 +11,24 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
+    environment: production
     defaults:
       run:
         shell: bash
         working-directory: ./terraform
 
     steps:
+    
+      - name: Branch name
+        run: echo Branch=${GITHUB_REF##*/} >> $GITHUB_ENV
+
+      - name: Output branch-name
+        run: echo running on branch ${{ env.Branch }}
+        
       - name: Checkout
         uses: actions/checkout@v3
-
+        with:
+          ref: ${{ env.Branch }}
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
       

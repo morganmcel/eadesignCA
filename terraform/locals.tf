@@ -6,16 +6,16 @@ locals {
   ecr = merge(local.ecr_defaults, var.ecr_values)
 
   ecs_defaults = {
-    cluster_name = "ecs-cluster"
-    service_name = "ecs-service"
+    cluster_name = "EADesign-Cluster"
+    service_name = "EADesign-service"
   }
   ecs = merge(local.ecs_defaults, var.ecs_values)
 
   lb_defaults = {
-    name     = "tf-alb"
+    name     = "eadesign-alb"
     internal = false
     target_group = {
-      name     = "tf-alb-tg"
+      name     = "ead-alb-tg"
       port     = 80
       protocol = "HTTP"
     }

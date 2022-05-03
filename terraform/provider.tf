@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "morganmc-tf-state"
-    key = "msc-devops/eadeployCA2/"
+    key = "msc-devops/eadeployCA2"
     region = "eu-west-1"
   }
   

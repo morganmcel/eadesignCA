@@ -10,30 +10,43 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
+    env:
+      TF_VERSION: latest
+      TF_WORKING_DIR: "./terraform"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
+        with: 
+          tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
 
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
+        with: 
+          tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
 
       - name: Terraform Init
         id: init
         run: terraform init
-      
+        with: 
+          tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
+
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
+        with: 
+          tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
 
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false
         continue-on-error: true
+        with: 
+          tf_actions_working_dir: ${{ env.TF_WORKING_DIR }}
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'

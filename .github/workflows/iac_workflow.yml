@@ -14,7 +14,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./terraform
 
     steps:
     
@@ -41,10 +40,15 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
+        env: 
+          working-directory: ./terraform
+
       
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
+        env: 
+          working-directory: ./terraform
 
       - name: Terraform Init
         id: init
@@ -53,6 +57,7 @@ jobs:
           TF_ACTION_WORKING_DIR: 'terraform'
           AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          working-directory: ./terraform
 
 
       - name: Terraform Validate
@@ -62,6 +67,8 @@ jobs:
           TF_ACTION_WORKING_DIR: 'terraform'
           AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          working-directory: ./terraform
+
 
       - name: Terraform Plan
         id: plan
@@ -72,6 +79,8 @@ jobs:
           TF_ACTION_WORKING_DIR: 'terraform'
           AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          working-directory: ./terraform
+
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'

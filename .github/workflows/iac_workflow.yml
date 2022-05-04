@@ -24,10 +24,14 @@ jobs:
           # Short name for current branch. For PRs, use target branch (base ref)
           GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+        env: 
+          working-directory: .
 
       # print branch name
       - name: Get branch name
         run: echo 'The branch name is' $GIT_BRANCH
+        env: 
+          working-directory: .
         
       - name: Checkout
         uses: actions/checkout@v3

@@ -62,9 +62,9 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
           IMAGE_TAG: ${{ steps.vars.outputs.tag }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
+          docker build -t eadesign/eadesign:latest .
+          docker push eadesign/eadesign:latest
+          echo "::set-output name=image::eadesign/eadesign:latest"
 
 #          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 #          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

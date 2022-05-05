@@ -64,12 +64,6 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-#          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-#          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-
-
-
       - name: Download task definition
         run: |
           aws ecs describe-task-definition --task-definition service --query taskDefinition > task-definition.json
@@ -79,7 +73,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
-          container-name: application  # edit me
+          container-name: hello-world  # edit me
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition

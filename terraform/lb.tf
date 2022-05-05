@@ -31,7 +31,6 @@ resource "aws_lb_listener" "front_end" {
     }
   }
 }
-
 resource "aws_lb_listener" "front_end_https" {
   load_balancer_arn = aws_lb.app_alb.arn
   port              = "443"
@@ -58,7 +57,6 @@ resource "aws_route53_record" "dns" {
   }
   depends_on = [aws_lb.app_alb]
 }
-
 resource "aws_security_group" "allow_http" {
   name        = "allow_http"
   description = "Allow HTTP inbound traffic"

@@ -42,7 +42,7 @@ resource "aws_ecs_service" "service" {
   network_configuration {
     subnets          = [for s in data.aws_subnet.subnets : s.id]
     assign_public_ip = true
-    security_groups  = ["${aws_security_group.allow_http.id}"]
+    security_groups  = ["${aws_security_group.container_access.id}"]
   }
 
   load_balancer {

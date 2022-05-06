@@ -12,6 +12,8 @@ on:
     paths: 
       - 'frontend/**' 
 
+  workflow_dispatch:
+
 env: 
     ECR_REPOSITORY: "ea-design-fe"
     CONTAINER_NAME: "ea-design-fe"

@@ -59,3 +59,28 @@ resource "aws_ecs_service" "service" {
     weight            = 100
   }
 }
+
+resource "aws_ecs_task_definition" "eadesign-fe-task" {
+  family = "service"
+  requires_compatibilities = [
+    "FARGATE",
+  ]
+  execution_role_arn = aws_iam_role.fargate.arn
+  network_mode       = "awsvpc"
+  cpu                = 256
+  memory             = 512
+  container_definitions = jsonencode([
+    {
+      name      = local.container.fe-name
+      image     = local.container.image
+      essential = true
+      portMappings = [
+        for port in local.container.ports :
+        {
+          containerPort = port
+          hostPort      = port
+        }
+      ]
+    }
+  ])
+}

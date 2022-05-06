@@ -35,7 +35,7 @@ jobs:
       - name: "Installing nodejs as pre-requisite for unittest"
         uses: "actions/setup-node@v3"
         with:
-          node-version: 14
+          node-version: 6.x
 
       - name: "Check directories"
         run: |

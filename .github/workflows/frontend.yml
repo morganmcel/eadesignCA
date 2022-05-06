@@ -13,8 +13,8 @@ on:
       - 'frontend/**' 
 
 env: 
-    ECR_REPOSITORY = "ea-design-fe"
-    CONTAINER_NAME = "ea-design-fe"
+    ECR_REPOSITORY: "ea-design-fe"
+    CONTAINER_NAME: "ea-design-fe"
 
 jobs:
   frontend:

@@ -12,7 +12,7 @@ on:
     paths: 
       - 'frontend/**' 
 
-  env: 
+env: 
     ECR_REPOSITORY = "ea-design-fe"
     CONTAINER_NAME = "ea-design-fe"
 

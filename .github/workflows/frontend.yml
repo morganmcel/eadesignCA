@@ -37,6 +37,11 @@ jobs:
         with:
           node-version: 14
 
+      - name: "Check directories"
+        run: |
+          pwd
+          ls -al
+
       - name: "npm install and build"
         run: |
           npm install

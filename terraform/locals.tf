@@ -1,7 +1,9 @@
 locals {
   region = var.aws_region
   ecr_defaults = {
-    repository_name = "ea-design-ca"
+    repository_name    = "ea-design-ca"
+    fe_repository_name = "ea-design-fe"
+    be_repository_name = "ea-design-be"
   }
   ecr = merge(local.ecr_defaults, var.ecr_values)
 
@@ -29,9 +31,10 @@ locals {
   use_default_vpc = local.vpc.id == ""
 
   container_defaults = {
-    name  = "application"
-    image = "particule/helloworld"
-    ports = [80]
+    name    = "application"
+    image   = "particule/helloworld"
+    ports   = [80]
+    fe-name = "eadesign-fe"
   }
   container = merge(local.container_defaults, var.container)
 }
